@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+     <RuntimeIdentifiers>osx.10.12-x64,ubuntu.14.04-x64,win7-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka" Version="1.3.4" />
+    <PackageReference Include="Akka.Cluster" Version="1.3.4" />
+    <PackageReference Include="Akka.Logger.NLog" Version="1.3.0-beta" />
+    <PackageReference Include="Akka.Remote" Version="1.3.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="1.1.2" />
+   </ItemGroup>
+  <ItemGroup>
+   <ProjectReference Include="..\SeedNodeManagement\SeedNodeManagement.csproj"/>
+   <ProjectReference Include="..\SeedNodeRepository\SeedNodeRepository.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="manifest.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

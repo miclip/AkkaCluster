@@ -1,0 +1,11 @@
+---
+applications:
+- name: simplelistener
+  memory: 512M
+  buildpack: binary_buildpack
+  health-check-type: process
+  random-route: true
+  stack: windows2012R2  
+  command: ./SimpleListener
+  env:
+    REDISCONNECTIONSTRING: [redis]
