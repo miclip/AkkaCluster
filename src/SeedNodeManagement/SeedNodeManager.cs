@@ -74,6 +74,25 @@ namespace AkkaCluster.SeedNodeManagement
                  }
                 });
             }
+
+            public void OnSplitClusterDetected(Action<IEnumerable<string>> action, IEnumerable<string> knownSeedNodes = null)
+            {
+                if(knownSeedNodes == null)
+                    knownSeedNodes = this.RetrieveAllSeedNodes(false);
+
+                   Task.Run(()=>{
+                 while(true)
+                 {
+                     var currentSeedNodes = this.RetrieveAllSeedNodes(false).ToList();
+                     var lostSeedNodes = knownSeedNodes.Except(currentSeedNodes);
+                     if(lostSeedNodes.Count() == knownSeedNodes.Count() && currentSeedNodes.Any())
+                        action(currentSeedNodes);
+                     Thread.Sleep(TimeSpan.FromSeconds(30));
+                 }
+                });
+
+
+            }
     }
 
 }

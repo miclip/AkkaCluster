@@ -46,8 +46,9 @@ namespace AkkaCluster.SimpleListener
             var config = ConfigurationFactory.ParseString(configString);
             StartUp(config,seedNodes);
 
-            seedNodeManager.OnSeedNodeChanges((IEnumerable<string> newSeedNodes)=>{
+            seedNodeManager.OnSplitCluster((IEnumerable<string> newSeedNodes)=>{
                 seedNodes.AddRange(newSeedNodes);
+                Console.Error.WriteLine("Split Cluster Detected");
                 newSeedNodes.ToList().ForEach(s=>Console.WriteLine($"New Seed Node Detected {s}"));
             }, seedNodes);
 
