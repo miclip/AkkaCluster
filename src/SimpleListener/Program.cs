@@ -36,7 +36,15 @@ namespace AkkaCluster.SimpleListener
             }
             cluster {
               seed-nodes = []
-              auto-down-unreachable-after = 30s
+              split-brain-resolver {
+                # Enable one of the available strategies (see descriptions below):
+                # static-quorum, keep-majority, keep-oldest, keep-referee 
+                active-strategy = off
+
+                # Decision is taken by the strategy when there has been no membership or
+                # reachability changes for this duration, i.e. the cluster state is stable.
+                stable-after = 20s
+              }   
             }
           }";
 
@@ -46,7 +54,7 @@ namespace AkkaCluster.SimpleListener
             var config = ConfigurationFactory.ParseString(configString);
             StartUp(config,seedNodes);
 
-            seedNodeManager.OnSplitCluster((IEnumerable<string> newSeedNodes)=>{
+            seedNodeManager.OnSplitClusterDetected((IEnumerable<string> newSeedNodes)=>{
                 seedNodes.AddRange(newSeedNodes);
                 Console.Error.WriteLine("Split Cluster Detected");
                 newSeedNodes.ToList().ForEach(s=>Console.WriteLine($"New Seed Node Detected {s}"));
