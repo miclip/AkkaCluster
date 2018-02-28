@@ -77,6 +77,7 @@ namespace AkkaCluster.SeedNodeManagement
 
             public void OnSplitClusterDetected(Action<IEnumerable<string>> action, IEnumerable<string> knownSeedNodes = null)
             {
+                
                 if(knownSeedNodes == null)
                     knownSeedNodes = this.RetrieveAllSeedNodes(false);
 
