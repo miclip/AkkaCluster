@@ -22,7 +22,38 @@ applications:
   env:
     NAME: lighthouse2
     REDISCONNECTIONSTRING: [redis]
-- name: simplelistener
+- name: lighthouse3
+  memory: 512M
+  buildpack: binary_buildpack
+  health-check-type: process
+  command: ./Lighthouse.NetCoreApp
+  no-route: true
+  stack: windows2012R2
+  path: ./src/Lighthouse.NetCoreApp/bin/Debug/netcoreapp2.0/win7-x64/publish
+  env:
+    NAME: lighthouse3
+    REDISCONNECTIONSTRING: [redis]
+- name: simplelistener1
+  memory: 512M
+  buildpack: binary_buildpack
+  health-check-type: process
+  no-route: true
+  stack: windows2012R2  
+  command: ./SimpleListener
+  path: ./src/SimpleListener/bin/Debug/netcoreapp2.0/win7-x64/publish
+  env:
+    REDISCONNECTIONSTRING: [redis]
+- name: simplelistener2
+  memory: 512M
+  buildpack: binary_buildpack
+  health-check-type: process
+  no-route: true
+  stack: windows2012R2  
+  command: ./SimpleListener
+  path: ./src/SimpleListener/bin/Debug/netcoreapp2.0/win7-x64/publish
+  env:
+    REDISCONNECTIONSTRING: [redis]
+- name: simplelistener3
   memory: 512M
   buildpack: binary_buildpack
   health-check-type: process
