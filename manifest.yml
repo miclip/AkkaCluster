@@ -5,6 +5,7 @@ applications:
   buildpack: binary_buildpack
   health-check-type: process
   command: ./Lighthouse.NetCoreApp
+  no-route: true
   stack: windows2012R2
   path: ./src/Lighthouse.NetCoreApp/bin/Debug/netcoreapp2.0/win7-x64/publish
   env:
@@ -15,6 +16,7 @@ applications:
   buildpack: binary_buildpack
   health-check-type: process
   command: ./Lighthouse.NetCoreApp
+  no-route: true
   stack: windows2012R2
   path: ./src/Lighthouse.NetCoreApp/bin/Debug/netcoreapp2.0/win7-x64/publish
   env:
@@ -24,7 +26,7 @@ applications:
   memory: 512M
   buildpack: binary_buildpack
   health-check-type: process
-  random-route: true
+  no-route: true
   stack: windows2012R2  
   command: ./SimpleListener
   path: ./src/SimpleListener/bin/Debug/netcoreapp2.0/win7-x64/publish
